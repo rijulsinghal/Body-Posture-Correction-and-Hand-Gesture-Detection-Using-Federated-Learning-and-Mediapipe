@@ -12,7 +12,7 @@ command : pip install mediapipe(in cmd)
 
 
 code.ipynb ---------> Used for testing the code written.
-downdog.py ---------> downdog(Yoga Posture) Code.
+downdog.py ---------> downdog(Yoga Posture) Code.pip
 model.py -----------> model.py file is used to work on the training of the model.
 
 Important Instruction:
@@ -20,7 +20,6 @@ Always write code in the form of the function.
 
     
 # TODO (in model.py file)
-# find_angle_goddess(goddess)
 # find_angle_plank(plank)
 # find_angle_tree(tree)
 # find_angle_warrior2(warrior2)
