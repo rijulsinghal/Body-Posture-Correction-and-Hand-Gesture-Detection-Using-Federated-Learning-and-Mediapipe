@@ -5,6 +5,8 @@ import cv2
 
 red = (50, 50, 255)
 green = (127, 255, 0)
+black = (0, 0, 0)
+window_size = [640, 480]
 
 def calculate_angle(x1, y1, x2, y2, x3, y3):
     angle = m.degrees(m.atan2(y3 - y2, x3 - x2) - m.atan2(y1 - y2, x1 - x2))
@@ -67,80 +69,72 @@ with mp_holisitic.Holistic(min_detection_confidence = 0.5, min_tracking_confiden
         left_knee_angle = calculate_angle(left_hip_x, left_hip_y, left_knee_x, left_knee_y, left_ankle_x, left_ankle_y)
         right_knee_angle = calculate_angle(right_hip_x, right_hip_y, right_knee_x, right_knee_y, right_ankle_x, right_ankle_y)
 
+        # Adding border to the frame
+        frame = cv2.copyMakeBorder(frame, 30, 30, 0, 0, cv2.BORDER_CONSTANT, black)
+
         # Check if Warrior II Conditions are met
 
-        # # Check if Left Elbow is Straight
+        # # Check if Elbows are Straight
+        # # # Check if Left Elbow is Straight
         if (left_elbow_angle > 165) and (left_elbow_angle < 195):
-            cv2.putText(frame, str(left_elbow_angle), 
-                           tuple(np.multiply([left_elbow_x, left_elbow_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
-                                )
+            cv2.putText(frame, 'Elbow Angle: ' + str(round(left_elbow_angle, 1)),
+                        tuple(np.multiply([left_elbow_x, left_elbow_y], window_size).astype(int)), 
+                        2, 0.5, green, 1)
         else:
-            cv2.putText(frame, str(left_elbow_angle), 
-                           tuple(np.multiply([left_elbow_x, left_elbow_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
-                                )
-        
-        # # Check if Right Elbow is Straight
+            cv2.putText(frame, 'Elbow Angle: ' + str(round(left_elbow_angle, 1)), 
+                        tuple(np.multiply([left_elbow_x, left_elbow_y], window_size).astype(int)),
+                        2, 0.5, red, 1)
+        # # # Check if Right Elbow is Straight
         if (right_elbow_angle > 165) and (right_elbow_angle < 195):
-            cv2.putText(frame, str(right_elbow_angle), 
-                           tuple(np.multiply([right_elbow_x, right_elbow_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
-                                )
+            cv2.putText(frame, 'Elbow Angle: ' + str(round(right_elbow_angle, 1)),
+                        tuple(np.multiply([right_elbow_x, right_elbow_y], window_size).astype(int)),
+                        2, 0.5, green, 1)
         else:
-            cv2.putText(frame, str(right_elbow_angle), 
-                           tuple(np.multiply([right_elbow_x, right_elbow_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
-                                )
+            cv2.putText(frame, 'Elbow Angle: ' + str(round(right_elbow_angle, 1)), 
+                        tuple(np.multiply([right_elbow_x, right_elbow_y], window_size).astype(int)),
+                        2, 0.5, red, 1)
 
-        # # Check if Left and Right Shoulders are in Correct Position
+        # # Check if Shoulders are in the Correct Position
+        # # # Check Left Shoulder
         if (left_shoulder_angle > 80) and (left_shoulder_angle < 110):
-            cv2.putText(frame, str(left_shoulder_angle), 
-                           tuple(np.multiply([left_shoulder_x, left_shoulder_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
-                                )
+            cv2.putText(frame, 'Shoulder Angle: ' + str(round(left_shoulder_angle, 1)),
+                        tuple(np.multiply([left_shoulder_x, left_shoulder_y], window_size).astype(int)),
+                        2, 0.5, green, 1)
         else:
-            cv2.putText(frame, str(left_shoulder_angle), 
-                           tuple(np.multiply([left_shoulder_x, left_shoulder_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
-                                )
-        
-        # # Check if Right Shoulder is in Correct Position
+            cv2.putText(frame, 'Shoulder Angle: ' + str(round(left_shoulder_angle, 1)), 
+                        tuple(np.multiply([left_shoulder_x, left_shoulder_y], window_size).astype(int)),
+                        2, 0.5, red, 1)
+        # # # Check Right Shoulder
         if (right_shoulder_angle > 80) and (right_shoulder_angle < 110):
-            cv2.putText(frame, str(right_shoulder_angle), 
-                           tuple(np.multiply([right_shoulder_x, right_shoulder_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
-                                )
+            cv2.putText(frame, 'Shoulder Angle: ' + str(round(right_shoulder_angle, 1)),
+                        tuple(np.multiply([right_shoulder_x, right_shoulder_y], window_size).astype(int)),
+                        2, 0.5, green, 1)
         else:
-            cv2.putText(frame, str(right_shoulder_angle), 
-                           tuple(np.multiply([right_shoulder_x, right_shoulder_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
-                                )
+            cv2.putText(frame, 'Shoulder Angle: ' + str(round(right_shoulder_angle, 1)), 
+                        tuple(np.multiply([right_shoulder_x, right_shoulder_y], window_size).astype(int)),
+                        2, 0.5, red, 1)
        
-        # # Check if one Knee is Straight and the other Knee is Bent
+        # # Check if Knees are in the Correct Position
+        # # # Check if one Knee is Straight and the other Knee is Bent
         if ((left_knee_angle > 165) and (left_knee_angle < 195)) and ((right_knee_angle > 90) and (right_knee_angle < 120)) or ((left_knee_angle > 90) and (left_knee_angle < 120)) or ((right_knee_angle > 165) and (right_knee_angle < 195)):
-            cv2.putText(frame, str(left_knee_angle), 
-                           tuple(np.multiply([left_knee_x, left_knee_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
-                                )
-            cv2.putText(frame, str(right_knee_angle), 
-                           tuple(np.multiply([right_knee_x, right_knee_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
-                                )
-
+            cv2.putText(frame, 'Knee Angle: ' + str(round(left_knee_angle, 1)), 
+                        tuple(np.multiply([left_knee_x, left_knee_y], window_size).astype(int)),
+                        2, 0.5, green, 1)
+            cv2.putText(frame, 'Knee Angle: ' + str(round(right_knee_angle, 1)), 
+                        tuple(np.multiply([right_knee_x, right_knee_y], window_size).astype(int)),
+                        2, 0.5, green, 1)
+        # # # If Knees not in Position
         else:
-            cv2.putText(frame, str(left_knee_angle), 
-                           tuple(np.multiply([left_knee_x, left_knee_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
-                                )
-            cv2.putText(frame, str(right_knee_angle), 
-                           tuple(np.multiply([right_knee_x, right_knee_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
-                                )
+            cv2.putText(frame, 'Knee Angle: ' + str(round(left_knee_angle, 1)), 
+                        tuple(np.multiply([left_knee_x, left_knee_y], window_size).astype(int)),
+                        2, 0.5, red, 1)
+            cv2.putText(frame, 'Knee Angle: ' + str(round(right_knee_angle, 1)), 
+                        tuple(np.multiply([right_knee_x, right_knee_y], window_size).astype(int)),
+                        2, 0.5, red, 1)
 
         # Output
         mp_drawing.draw_landmarks(frame,results.pose_landmarks,mp_holisitic.POSE_CONNECTIONS)
-        cv2.imshow("Warrior II Pose" , frame)
+        cv2.imshow("Warrior II Pose", frame)
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
 
