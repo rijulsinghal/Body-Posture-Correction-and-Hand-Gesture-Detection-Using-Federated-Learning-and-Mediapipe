@@ -2,7 +2,10 @@ import numpy as np
 import mediapipe as mp
 import math as m
 import cv2
-
+from gtts import gTTS
+import os
+from playsound import playsound  
+import pyttsx3
 # Initialize frame counters.
 good_frames = 0
 bad_frames  = 0
@@ -27,6 +30,8 @@ def findDistance(x1, y1, x2, y2):
     return dist
 
 
+    
+    
 mp_holisitic = mp.solutions.holistic
 mp_drawing = mp.solutions.drawing_utils
 cap = cv2.VideoCapture(0)
@@ -44,22 +49,22 @@ with mp_holisitic.Holistic(min_detection_confidence=0.5,min_tracking_confidence=
         if(results.pose_landmarks is None):
             continue
 
-        right_shoulder_y = results.pose_landmarks.landmark[11].y
-        right_shoulder_z = results.pose_landmarks.landmark[11].z
+        right_shoulder_y = results.pose_landmarks.landmark[11].y*h
+        right_shoulder_z = results.pose_landmarks.landmark[11].z*w
         
-        left_shoulder_y = results.pose_landmarks.landmark[12].y
-        left_shoulder_z = results.pose_landmarks.landmark[12].z
+        left_shoulder_y = results.pose_landmarks.landmark[12].y*h
+        left_shoulder_z = results.pose_landmarks.landmark[12].z*w
 
-        right_ear_y = results.pose_landmarks.landmark[7].y
-        right_ear_z = results.pose_landmarks.landmark[7].z
+        right_ear_y = results.pose_landmarks.landmark[7].y*h
+        right_ear_z = results.pose_landmarks.landmark[7].z*w
 
-        left_ear_y = results.pose_landmarks.landmark[8].y
-        left_ear_z = results.pose_landmarks.landmark[8].z
+        left_ear_y = results.pose_landmarks.landmark[8].y*h
+        left_ear_z = results.pose_landmarks.landmark[8].z*w
 
-        min_dis = left_shoulder_z-left_ear_z
+        min_dis = m.degrees(m.atan(abs(left_shoulder_z-left_ear_z)/abs(left_ear_y-left_shoulder_y)))
 
         print(min_dis)
-        if (min_dis <= 0.2 and min_dis >= -0.1):
+        if (min_dis <= 50):
             bad_frames = 0
             good_frames += 1
         else:
@@ -74,6 +79,12 @@ with mp_holisitic.Holistic(min_detection_confidence=0.5,min_tracking_confidence=
         else:
             time_string_bad = 'Bad Posture Time : ' + str(round(bad_time, 1)) + 's'
             cv2.putText(frame, time_string_bad, (10, h - 20), font, 0.9, red, 2)
+
+        if bad_time > 10:
+            cv2.putText(frame, "Bad Posture for more than 10 seconds", (10,20), font, 0.9, red, 2)
+            bad_time = 0
+            
+
 
         mp_drawing.draw_landmarks(frame,results.pose_landmarks,mp_holisitic.POSE_CONNECTIONS)
         cv2.imshow("Sitting Posture" , frame)
