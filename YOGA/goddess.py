@@ -6,6 +6,8 @@ import math
 
 red = (50, 50, 255)
 green = (127, 255, 0)
+black = (0, 0, 0)
+
 
 def dist(x1,y1,x2,y2):
     return ((x1-x2)**2+(y1-y2)**2)**0.5
@@ -43,31 +45,32 @@ with mp_holisitic.Holistic(min_detection_confidence=0.5,min_tracking_confidence=
 
         left_ans =2*m.degrees(m.atan(dist(left_hip_x,left_hip_y,left_knee_x,left_knee_y)/dist(left_knee_x,left_knee_y,left_heel_x,left_heel_y)))
         right_ans = 2*m.degrees(m.atan(dist(right_hip_x,right_hip_y,right_knee_x,right_knee_y)/dist(right_knee_x,right_knee_y,right_heel_x,right_heel_y)))
+        frame = cv2.copyMakeBorder(frame, 30, 30, 0, 0, cv2.BORDER_CONSTANT, black)
 
         print(left_ans)
         print(right_ans)
         
         # # PRINTING ANGLE AND ERROR DETECTION
         if left_ans >= 80 and left_ans <= 100:
-            cv2.putText(frame, str(left_ans), 
+            cv2.putText(frame,"Left Knee : " + str(round(left_ans,1)), 
                            tuple(np.multiply([left_knee_x,left_knee_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
+                           2,0.5, green, 1
                                 )
         else:
-            cv2.putText(frame, str(left_ans), 
+            cv2.putText(frame,"Left Knee" +str(round(left_ans,1)), 
                            tuple(np.multiply([left_knee_x,left_knee_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
+                           2,0.5,green,1
                                 )
 
         if right_ans >= 80 and right_ans <= 100:
-            cv2.putText(frame, str(right_ans), 
+            cv2.putText(frame, "Right Knee"+str(round(right_ans,1)), 
                            tuple(np.multiply([right_knee_x,right_knee_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
+                           2,0.5,red,1
                                 )
         else:
-            cv2.putText(frame, str(right_ans), 
+            cv2.putText(frame, "Right Knee"+str(round(right_ans,1)), 
                            tuple(np.multiply([right_knee_x,right_knee_y], [640, 480]).astype(int)), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
+                           2,0.5,red,1
                                 )
        
 
