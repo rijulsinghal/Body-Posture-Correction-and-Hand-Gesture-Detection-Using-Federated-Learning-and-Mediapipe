@@ -22,7 +22,7 @@ with mp_holisitic.Holistic(min_detection_confidence=0.5,min_tracking_confidence=
     while cap.isOpened():
         ret, frame = cap.read()
         results = holistic.process(frame)
-
+        
 
         if(results.pose_landmarks is None):
             continue
@@ -48,7 +48,7 @@ with mp_holisitic.Holistic(min_detection_confidence=0.5,min_tracking_confidence=
         print(right_ans)
         
         # # PRINTING ANGLE AND ERROR DETECTION
-        if left_ans >= 75 and left_ans <= 105:
+        if left_ans >= 80 and left_ans <= 100:
             cv2.putText(frame, str(left_ans), 
                            tuple(np.multiply([left_knee_x,left_knee_y], [640, 480]).astype(int)), 
                            cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
@@ -59,7 +59,7 @@ with mp_holisitic.Holistic(min_detection_confidence=0.5,min_tracking_confidence=
                            cv2.FONT_HERSHEY_SIMPLEX, 1, red, 3, cv2.LINE_AA
                                 )
 
-        if right_ans >= 75 and right_ans <= 105:
+        if right_ans >= 80 and right_ans <= 100:
             cv2.putText(frame, str(right_ans), 
                            tuple(np.multiply([right_knee_x,right_knee_y], [640, 480]).astype(int)), 
                            cv2.FONT_HERSHEY_SIMPLEX, 1, green, 3, cv2.LINE_AA
