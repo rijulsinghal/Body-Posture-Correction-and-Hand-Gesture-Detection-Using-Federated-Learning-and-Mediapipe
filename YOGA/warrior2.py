@@ -133,9 +133,9 @@ with mp_holisitic.Holistic(min_detection_confidence = 0.5, min_tracking_confiden
                         2, 0.5, red, 1)
 
         # Output
-        mp_drawing.draw_landmarks(frame,results.pose_landmarks,mp_holisitic.POSE_CONNECTIONS)
+        mp_drawing.draw_landmarks(frame,results.pose_landmarks, mp_holisitic.POSE_CONNECTIONS)
         cv2.imshow("Warrior II Pose", frame)
-        if cv2.waitKey(10) & 0xFF == ord('q'):
+        if (cv2.waitKey(10) & 0xFF == ord('q')):
             break
 
 cap.release()
