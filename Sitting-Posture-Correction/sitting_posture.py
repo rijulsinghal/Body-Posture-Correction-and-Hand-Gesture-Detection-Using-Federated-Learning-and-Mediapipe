@@ -64,7 +64,7 @@ with mp_holisitic.Holistic(min_detection_confidence=0.5,min_tracking_confidence=
         min_dis = m.degrees(m.atan(abs(left_shoulder_z-left_ear_z)/abs(left_ear_y-left_shoulder_y)))
 
         print(min_dis)
-        if (min_dis <= 65):
+        if (min_dis <= 60):
             bad_frames = 0
             good_frames += 1
         else:
