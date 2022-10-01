@@ -65,7 +65,7 @@ with mp_holisitic.Holistic(min_detection_confidence=0.5,min_tracking_confidence=
         if right_ans >= 80 and right_ans <= 100:
             cv2.putText(frame, "Right Knee"+str(round(right_ans,1)), 
                            tuple(np.multiply([right_knee_x,right_knee_y], [640, 480]).astype(int)), 
-                           2,0.5,red,1
+                           2,0.5,green,1
                                 )
         else:
             cv2.putText(frame, "Right Knee"+str(round(right_ans,1)), 
