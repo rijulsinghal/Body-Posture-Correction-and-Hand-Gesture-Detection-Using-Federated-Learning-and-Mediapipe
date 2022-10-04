@@ -20,6 +20,7 @@ Always write code in the form of the function.
 
 # TODO
 #  Yoga-Posture-Detection
+#  Should we add new yoga posture (Discuss)
 #  Sign-Language-Detection
 #  Federated Learning
 #  Homomorphic Encryption
