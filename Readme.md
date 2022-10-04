@@ -4,11 +4,10 @@ Requirements:
 1) Mediapipe
 2) cv2
 
-command : pip install mediapipe(in cmd)
-          pip install cv2  (in cmd)
+command :
 ------------------------------------------------------
-          %pip install mediapipe(ipynb/py file)
-          %pip install cv2  (ipynb/py file)
+        pip install mediapipe
+        pip install cv2
 
 
 code.ipynb ---------> Used for testing the code written.
@@ -18,8 +17,14 @@ model.py -----------> model.py file is used to work on the training of the model
 Important Instruction:
 Always write code in the form of the function.
 
-    
-# TODO (in model.py file)
-# find_angle_plank(plank)
-# find_angle_tree(tree)
-# find_angle_warrior2(warrior2)
+
+# TODO
+#  Yoga-Posture-Detection
+#  Sign-Language-Detection
+#  Federated Learning
+#  Homomorphic Encryption
+#  Front-End Implementation (Application or a Web App)
+#  LLD
+#  PPT (Review-3 and 4) (Main Highlights -> Complexity,Algorithm,Accuracy)
+#  Final Report
+#  Draft Paper (Main Highlights -> Complexity,Algorithm,Accuracy)
