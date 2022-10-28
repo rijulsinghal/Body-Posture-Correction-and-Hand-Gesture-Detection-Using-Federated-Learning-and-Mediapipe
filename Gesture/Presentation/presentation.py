@@ -4,8 +4,8 @@ import os
 import numpy as np
 
 # Parameters
-width, height = 1920, 1080
-gestureThreshold = 500
+width, height = 1280, 720
+gestureThreshold = 600
 folderPath = "Gesture/Presentation/Slides"
 
 # Camera Setup
@@ -14,7 +14,7 @@ cap.set(3, width)
 cap.set(4, height)
 
 # Hand Detector
-detectorHand = HandDetector(detectionCon=0.8, maxHands=1)
+detectorHand = HandDetector(detectionCon = 0.8, maxHands = 1)
 
 # Variables
 imgList = []
@@ -30,7 +30,7 @@ annotationStart = False
 hs, ws = int(120 * 1), int(213 * 1)  # width and height of small image
 
 # Get list of presentation images
-pathImages = sorted(os.listdir(folderPath), key=len)
+pathImages = sorted(os.listdir(folderPath), key = len)
 
 while True:
     # Get image frame
@@ -42,7 +42,7 @@ while True:
     # Find the hand and its landmarks
     hands, img = detectorHand.findHands(img)  # with draw
     # Draw Gesture Threshold line
-    cv2.line(img, (0, gestureThreshold), (width, gestureThreshold), (0, 255, 0), 10)
+    cv2.line(img, (0, gestureThreshold), (width, gestureThreshold), (0, 255, 0), 5)
 
     if hands and buttonPressed is False:  # If hand is detected
 
@@ -53,7 +53,7 @@ while True:
 
         # Constrain values for easier drawing
         xVal = int(np.interp(lmList[8][0], [width // 2, width], [0, width]))
-        yVal = int(np.interp(lmList[8][1], [150, height-150], [0, height]))
+        yVal = int(np.interp(lmList[8][1], [150, height - 150], [0, height]))
         indexFinger = xVal, yVal
 
         if cy <= gestureThreshold:  # If hand is at the height of the face
