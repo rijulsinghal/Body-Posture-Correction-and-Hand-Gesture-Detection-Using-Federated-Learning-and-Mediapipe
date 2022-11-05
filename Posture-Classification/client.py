@@ -39,7 +39,10 @@ while cap.isOpened():
     images_list.append(np.array(x_val))
     x = np.asarray(images_list)
     result = model.predict(x)
-    print(result)
+    result = result[0]
+
+    max_val = max(result)
+    print(np.where(result == max_val))
 
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
