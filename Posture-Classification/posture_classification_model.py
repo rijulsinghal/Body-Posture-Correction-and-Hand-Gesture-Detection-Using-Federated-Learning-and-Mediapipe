@@ -20,8 +20,8 @@ from tensorflow.keras.layers import Input, Lambda, Dense, Flatten, Dropout, Batc
 
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, recall_score, precision_score, f1_score 
 
-dataset_path = os.listdir("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/DATASET/TRAIN")
-labels = os.listdir("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/DATASET/TRAIN")
+dataset_path = os.listdir("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/TRAIN")
+labels = os.listdir("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/TRAIN")
 print (labels)  
 
 img_size = 224
@@ -39,13 +39,15 @@ def get_data(data_dir):
                 print(e)
     return np.array(data)
 
-train = get_data("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/DATASET/TRAIN")
-val = get_data("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/DATASET/TEST")
+train = get_data("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/TRAIN")
+val = get_data("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/TEST")
 
 x_train = []
 y_train = []
 x_val = []
 y_val = []
+
+
 
 for feature, label in train:
   x_train.append(feature)
@@ -54,6 +56,8 @@ for feature, label in train:
 for feature, label in val:
   x_val.append(feature)
   y_val.append(label)
+
+print(x_train[0].shape)
 
 # Normalize the data
 x_train = np.array(x_train) / 255
@@ -106,9 +110,4 @@ history = model.fit(x_train, y_train, validation_data = (x_val, y_val), epochs =
 
 
 model.save("models/posture-classification")
-reconstruct_model = keras.models.load_model("models/posture-classification")
-result = reconstruct_model.predict(x_val)
-
-y_pred=np.argmax(result,axis=1)
-print(classification_report(y_pred,y_val))
 
