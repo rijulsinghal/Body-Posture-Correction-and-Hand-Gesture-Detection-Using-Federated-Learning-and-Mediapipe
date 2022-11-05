@@ -109,5 +109,5 @@ history = model.fit(x_train, y_train, validation_data = (x_val, y_val), epochs =
                     shuffle=True)
 
 
-model.save("models/posture-classification")
+model.save("Models/posture-classification")
 

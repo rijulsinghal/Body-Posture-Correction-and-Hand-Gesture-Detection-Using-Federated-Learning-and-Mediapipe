@@ -26,7 +26,7 @@ from tensorflow.keras.layers import Input, Lambda, Dense, Flatten, Dropout, Batc
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, recall_score, precision_score, f1_score 
 
 cap = cv2.VideoCapture(0)
-model = keras.models.load_model("models/posture-classification")
+model = keras.models.load_model("Models/posture-classification")
 img_size = 224
 x_val = []
 
