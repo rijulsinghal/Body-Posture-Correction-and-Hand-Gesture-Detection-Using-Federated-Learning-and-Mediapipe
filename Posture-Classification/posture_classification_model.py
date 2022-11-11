@@ -1,23 +1,12 @@
 import os
 import cv2
-import pickle
 import numpy as np
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-
-import keras
-import tensorflow
-import pickle
 from tensorflow.keras.models import Model
 from tensorflow.keras.utils import plot_model
-from tensorflow.keras.models import Sequential
 from tensorflow.keras.applications import VGG19
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras.layers import Input, Lambda, Dense, Flatten, Dropout, BatchNormalization, Activation
-
+from tensorflow.keras.layers import Dense, Flatten
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score, recall_score, precision_score, f1_score 
 
 dataset_path = os.listdir("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/TRAIN")
@@ -46,8 +35,6 @@ x_train = []
 y_train = []
 x_val = []
 y_val = []
-
-
 
 for feature, label in train:
   x_train.append(feature)
