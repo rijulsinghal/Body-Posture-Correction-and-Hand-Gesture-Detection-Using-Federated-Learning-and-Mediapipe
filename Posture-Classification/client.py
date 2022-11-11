@@ -27,6 +27,7 @@ from sklearn.metrics import confusion_matrix, classification_report, accuracy_sc
 
 cap = cv2.VideoCapture(0)
 model = keras.models.load_model("Models/posture-classification")
+labels = os.listdir("C:/Users/HP/Documents/Capstone-Project/Implementation/Dataset/Yoga-Dataset/TRAIN")
 img_size = 224
 x_val = []
 
@@ -42,8 +43,8 @@ while cap.isOpened():
     result = result[0]
 
     max_val = max(result)
-    print(np.where(result == max_val))
-
+    index = np.where(result == max_val)[0][0]
+    print(labels[index])
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
