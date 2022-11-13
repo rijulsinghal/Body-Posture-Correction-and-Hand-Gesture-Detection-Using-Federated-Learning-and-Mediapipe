@@ -1,1 +1,1 @@
-Bad Posture Time : 3.6s
+Bad Posture Time : 0.8s

@@ -3,6 +3,18 @@ import math as m
 import cv2
 time_string_good = None
 time_string_bad = None
+
+# Font type.
+font = cv2.FONT_HERSHEY_SIMPLEX
+ 
+# Colors.
+blue = (255, 127, 0)
+red = (50, 50, 255)
+green = (127, 255, 0)
+dark_blue = (127, 20, 0)
+light_green = (127, 233, 100)
+yellow = (0, 255, 255)
+pink = (255, 0, 255)
                     
 def findAngle(x1, y1, x2, y2):
     theta = m.acos( (y2 -y1)*(-y1) / (m.sqrt(
@@ -34,8 +46,7 @@ def main_func():
             if not sucess:
                 break
             else:
-                ret, buffer = cv2.imencode('.jpg', frame)
-                image = buffer.tobytes()
+                
                 results = holistic.process(frame)
                 if(results.pose_landmarks is None):
                     continue
@@ -48,24 +59,21 @@ def main_func():
 
                 min_dis = m.degrees(m.atan(abs(left_shoulder_z-left_ear_z)/abs(left_ear_y-left_shoulder_y)))
 
-                if (min_dis <= 60):
+                if (min_dis <= 50):
                     good_frames += 1
                     good_time = (1 / fps) * good_frames
                     time_string_good = 'Good Posture Time : ' + str(round(good_time, 1)) + 's'
-                    fp = open("Sitting-Posture-Detection/good_time.txt","w")
-                    fp.write(time_string_good)
-                    # print(time_string_good)
-                    fp.close()
+                    cv2.putText(frame, time_string_good, (25,25), font, 0.6, green, 2)
+
                 
                 else:
                     bad_frames += 1
                     bad_time =  (1 / fps) * bad_frames
                     time_string_bad = 'Bad Posture Time : ' + str(round(bad_time, 1)) + 's'
-                    fp = open("Sitting-Posture-Detection/bad_time.txt","w")
-                    fp.write(time_string_bad)
-                    # print(time_string_bad)
-                    fp.close()
-                
+                    cv2.putText(frame, time_string_bad, (25,25), font, 0.6, red, 2)
+
+                ret, buffer = cv2.imencode('.jpg', frame)
+                image = buffer.tobytes()
                 yield (b'--frame\r\n'
                        b'Content-Type: image/jpeg\r\n\r\n' + image + b'\r\n')  # concat frame one by one and show result
                 
