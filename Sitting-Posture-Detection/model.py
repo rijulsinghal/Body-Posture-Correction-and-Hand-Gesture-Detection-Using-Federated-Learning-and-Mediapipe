@@ -41,12 +41,11 @@ def main_func():
 
         while cap.isOpened():
             sucess, frame = cap.read()
-            h, w = frame.shape[:2]
             
             if not sucess:
                 break
             else:
-                
+                h, w = frame.shape[:2]
                 results = holistic.process(frame)
                 if(results.pose_landmarks is None):
                     continue
