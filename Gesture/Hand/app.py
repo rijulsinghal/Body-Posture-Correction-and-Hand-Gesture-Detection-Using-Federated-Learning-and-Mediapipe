@@ -6,15 +6,16 @@ import argparse
 import itertools
 from collections import Counter
 from collections import deque
-
+import pandas as pd
 import cv2 as cv
 import numpy as np
 import mediapipe as mp
-
+from temp_keypoint_classification import *
 from utils import CvFpsCalc
 from model import KeyPointClassifier
 from model import PointHistoryClassifier
-
+import nbformat
+from nbconvert.preprocessors import ExecutePreprocessor
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -105,7 +106,40 @@ def main():
         key = cv.waitKey(10)
         if key == 27:  # ESC
             break
+
+        if key == 107:
+            name = input("Enter name of Gesture : ")
+            print(name)
+            csv_path_label = 'Gesture/Hand/model/keypoint_classifier/keypoint_classifier_label.csv'
+            with open(csv_path_label, 'a') as f:
+                # writer = csv.writer(f)
+                f.write(name)
+                f.write("\n")
+
+        
+        if key == 110:
+            # csv_path = 'Gesture/Hand/model/keypoint_classifier/keypoint.csv'
+            # csv_path_label = 'Gesture/Hand/model/keypoint_classifier/keypoint_classifier_label.csv'
+            # results = pd.read_csv(csv_path_label)
+            # left = len(results)
+            # right = 0
+            # with open(csv_path, "r", encoding="utf-8", errors="ignore") as scraped:
+            #     final_line = scraped.readlines()[-1]
+            #     right = int(final_line[0])
+            # print(left,right)
+            # if left != right:
+            train_model()
+            # with open('Gesture/Hand/keypoint_classification.ipynb') as f:
+            #     nb = nbformat.read(f, as_version=4)
+            # ep = ExecutePreprocessor(timeout=600, kernel_name='python3')
+            # ep.preprocess(nb)
+            main()
+                
+
         number, mode = select_mode(key, mode)
+
+        
+
 
         # Camera capture #####################################################
         ret, image = cap.read()
@@ -283,9 +317,17 @@ def logging_csv(number, mode, landmark_list, point_history_list):
         pass
     if mode == 1 and (0 <= number <= 9):
         csv_path = 'Gesture/Hand/model/keypoint_classifier/keypoint.csv'
+        csv_path_label = 'Gesture/Hand/model/keypoint_classifier/keypoint_classifier_label.csv'
+
+        # with open(csv_path, "r", encoding="utf-8", errors="ignore") as scraped:
+        #     final_line = scraped.readlines()[-1]
+        #     number = int(final_line[0])
+        results = pd.read_csv(csv_path_label)
+        ind = len(results)
+        # print(number)
         with open(csv_path, 'a', newline="") as f:
             writer = csv.writer(f)
-            writer.writerow([number, *landmark_list])
+            writer.writerow([ind, *landmark_list])
     if mode == 2 and (0 <= number <= 9):
         csv_path = 'Gesture/Hand/model/point_history_classifier/point_history.csv'
         with open(csv_path, 'a', newline="") as f:
