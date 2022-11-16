@@ -145,6 +145,12 @@ def main():
 
         debug_image = draw_point_history(debug_image, point_history)
         debug_image = draw_info(debug_image, fps, mode, number)
+
+        ret, buffer = cv.imencode('.jpg', debug_image)
+        image = buffer.tobytes()
+        yield (b'--frame\r\n'
+             b'Content-Type: image/jpeg\r\n\r\n' + image + b'\r\n')  # concat frame one by one and show result
+                
         cv.imshow('Hand Gesture Recognition', debug_image)
 
     cap.release()
