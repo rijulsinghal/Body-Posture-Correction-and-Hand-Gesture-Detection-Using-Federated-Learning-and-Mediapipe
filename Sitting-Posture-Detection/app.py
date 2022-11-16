@@ -1,13 +1,19 @@
 import model as m
-from flask import Flask, render_template, Response
-import cv2
+from flask import Flask, render_template, Response , request
 
 app = Flask(__name__)
-
-@app.route('/video_feed')
+mode = None
+@app.route('/video_feed' , methods = ["GET","POST"])
 def video_feed():
-    return Response(m.main_func(),mimetype='multipart/x-mixed-replace; boundary=frame')
+    if request.method == "POST":
+        try:
+            mode = request.form.get("mode")
+            print(mode)
+            return Response(m.main_func(mode),mimetype='multipart/x-mixed-replace; boundary=frame')
+        except:
+            return Response(m.main_func(None),mimetype='multipart/x-mixed-replace; boundary=frame')
 
+    return Response(m.main_func(None),mimetype='multipart/x-mixed-replace; boundary=frame')
 @app.route('/')
 def index():
     """Video streaming home page."""
