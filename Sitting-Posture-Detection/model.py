@@ -76,9 +76,9 @@ def main_func(mode=None):
                     if(mode == "Lenient"):
                         angle = 50
                     elif(mode == "Medium"):
-                        angle = 45
+                        angle = 48
                     elif(mode == "Strict"):
-                        angle = 40
+                        angle = 47
 
                     min_dis = m.degrees(m.atan(abs(left_shoulder_z-left_ear_z)/abs(left_ear_y-left_shoulder_y)))
                     
