@@ -9,11 +9,11 @@ def train_model():
     print("Starting training .....")
     RANDOM_SEED = 42
 
-    dataset = 'Gesture/Hand/model/keypoint_classifier/keypoint.csv'
-    model_save_path = 'Gesture/Hand/model/keypoint_classifier/keypoint_classifier.hdf5'
-    tflite_save_path = 'Gesture/Hand/model/keypoint_classifier/keypoint_classifier.tflite'
+    dataset = 'Gesture/Hand/Client_2/model/keypoint_classifier/keypoint.csv'
+    model_save_path = 'Gesture/Hand/Client_2/model/keypoint_classifier/keypoint_classifier.hdf5'
+    tflite_save_path = 'Gesture/Hand/Client_2/model/keypoint_classifier/keypoint_classifier.tflite'
 
-    csv_path_label = 'Gesture/Hand/model/keypoint_classifier/keypoint_classifier_label.csv'
+    csv_path_label = 'Gesture/Hand/Client_2/model/keypoint_classifier/keypoint_classifier_label.csv'
     results = pd.read_csv(csv_path_label)
     NUM_CLASSES = len(results)+1
 
