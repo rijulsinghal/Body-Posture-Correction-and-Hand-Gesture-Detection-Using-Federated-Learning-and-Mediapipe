@@ -91,7 +91,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Sitting-Posture-Correction.</title>
+    <title>Yoga-Posture-Correction.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
@@ -100,9 +100,10 @@
         <p class = "tag">Select The Yoga Posture You Like To Do.</p>
         <form action="{{ url_for('index') }}" method="post" class = "form">
             <select name="yoga-posture" id="yoga-posture" class = "select">
+                <option value="select_posture">Select Posture</option>
                 <option value="Ardha_Pincha_Mayurasana">Ardha Pincha Mayurasana (Downdog Pose)</option>
                 <option value="Bitilasana">Bitilasana (Cow Pose)</option>
-                <option value="Chaturanga_Dandasana">Chaturanga Dandasana (Push ups Pose)</option>
+                <option value="Chaturanga_Dandasana">Chaturanga Dandasana (Plank Pose)</option>
                 <option value="Dandasana">Dandasana (Staff Pose)</option>
                 <option value="Utkata_Konasana">Utkata Konasana (Goddess Pose)</option>
                 <option value="Hanumanasana">Hanumanasana (Monkey Pose)</option>
