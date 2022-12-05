@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<style>
+    .button {
+        background-color: #4CAF50;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 2px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50;
+        border-radius: 5px;
+    }
+
+    .button2 {
+        background-color: white;
+        color: black;
+        font-size: 12px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px ;
+        margin-left: 53.5%;
+        margin-top: -2.1%;
+        border: 2px solid #4CAF50;
+        border-radius: 5px;
+    }
+
+
+    .button1:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .button2:hover{
+        background-color: #4CAF50;
+        color: white;
+    }
+    .select{
+        margin-left: auto;
+        margin-right: auto; 
+        display: block; 
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px ;
+        border-color: #4CAF50;
+        background-color: white;
+        color: black;
+    }
+    .select:hover{
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .form{
+        margin-left: -5%;
+        margin-top: 20px;
+    }
+
+    .tag{
+        background-color: #4CAF50;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <title>Sitting-Posture-Correction.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+    <div>
+        <p class = "tag">Select Your Level.</p>
+        <form action="{{ url_for('video_feed') }}" method="post" class = "form">
+            <select name="mode" id="mode" class = "select">
+                <option value="Lenient">Lenient</option>
+                <option value="Medium">Medium</option>
+                <option value="Strict">Strict</option>
+              </select>
+            <button type="submit" class="button button2">Let's Start.</button>
+        </form>
+
+        <img src="{{ url_for('video_feed') }}"
+            style="margin-left: auto; margin-right: auto; display: block; margin-top: 5px;">
+        <!-- <button class="button button1" onclick="loadDoc()">Tell My Accuracy.</button> -->
+        <p id="accuracy"></p>
+    </div>
+
+    <script>
+        function loadDoc(file = "C:/Users/HP/Documents/Capstone-Project/Implementation/Sitting-Posture-Detection/templates/temp.txt") {
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", file, true);
+            rawFile.onreadystatechange = function () {
+                if (rawFile.readyState === 4) {
+                    if (rawFile.status === 200 || rawFile.status == 0) {
+                        var allText = rawFile.responseText;
+                        document.getElementById('accuracy').innerHTML = allText;
+                    }
+                }
+            }
+            rawFile.send(null);
+        }
+    </script>
+
+</body>
+
+</html>
