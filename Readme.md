@@ -1,30 +1,14 @@
--------------------------YOGA POSTURE CORRECTION---------------------------------
 
-Requirements:
-1) Mediapipe
-2) cv2
+# Body Posture Correction and Hand Gesture Detection Using Federated Learning and Mediapipe
 
-command :
-------------------------------------------------------
-        pip install mediapipe
-        pip install cv2
+## Authors
 
-
-code.ipynb ---------> Used for testing the code written.
-downdog.py ---------> downdog(Yoga Posture) Code.pip
-model.py -----------> model.py file is used to work on the training of the model.
-
-Important Instruction:
-Always write code in the form of the function.
+- [Rijul Singhal](https://github.com/rijulsinghal)
+- [Hardik Modi](https://github.com/modi-hardik)
+- [S Srihari](https://github.com/retocto)
+- [Advit Gandhi](https://github.com/altf4-89)
 
 
-# TODO
-#  Yoga-Posture-Detection
-#  Sign-Language-Detection
-#  Federated Learning
-#  Homomorphic Encryption
-#  Front-End Implementation (Application or a Web App)
-#  LLD
-#  PPT (Review-3 and 4) (Main Highlights -> Complexity,Algorithm,Accuracy)
-#  Final Report
-#  Draft Paper (Main Highlights -> Complexity,Algorithm,Accuracy)
+## Paper-Link
+
+## Demo
